@@ -1,0 +1,11 @@
+[project]
+name = "prce360-service-list-converter"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openpyxl>=3.1",
+    "python-docx>=1.1",
+    "pillow>=10.0",
+]

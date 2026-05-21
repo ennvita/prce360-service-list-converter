@@ -6,6 +6,10 @@ Converts a telecom service list (Excel or Word) into the GridTemplate format use
 
 ---
 
+> **Disclaimer:** This tool is provided as-is for informational and administrative convenience only. The New Mexico Public Regulation Commission (NMPRC) makes no representations or warranties of any kind, express or implied, regarding the accuracy, completeness, reliability, or suitability of this tool for any purpose. The NMPRC assumes no responsibility and shall not be liable for any errors, omissions, data loss, or damages of any kind arising from the use of or reliance on this tool. Use of this tool is entirely at your own risk.
+
+---
+
 ## Table of Contents
 
 - [What This App Does](#what-this-app-does)

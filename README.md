@@ -42,12 +42,12 @@ You need the file named something like `PRCe360ServiceListConverter-1.0.0-win-am
 
 1. Double-click the `.msi` file.
 2. If Windows shows a blue "Windows protected your PC" warning, click **More info**, then click **Run anyway**. This appears because the installer is not signed by a large software company — it is safe to proceed.
-3. If prompted by User Account Control ("Do you want to allow this app to make changes?"), click **Yes**.
+3. When prompted by User Account Control ("Do you want to allow this app to make changes?"), click **Yes**. Administrator rights are required because the app installs to `Program Files`.
 
 ### Step 3 — Follow the installer
 
 1. Click **Next** on the welcome screen.
-2. Click **Next** again to accept the default install location (your user profile — no administrator password needed).
+2. Click **Next** again to accept the default install location (`C:\Program Files\PRCe360ServiceListConverter`).
 3. Click **Install**.
 4. Click **Finish** when the installer completes.
 
@@ -183,21 +183,26 @@ Alternatively, run the original `.msi` file again and choose **Remove**.
 
 - Windows 10 or 11
 - Python 3.12 or later — download from [python.org](https://www.python.org/downloads/). During installation, check **"Add Python to PATH"**.
+- The `brand\` folder must be present in the project root (it is gitignored — copy it manually if cloning fresh). It must contain `NMPRC_logo-1.png`.
 
 ### Steps
 
-1. Clone or copy this repository to the Windows machine.
+1. Clone or copy this repository to the Windows machine. Ensure `brand\NMPRC_logo-1.png` is present.
 2. Open a Command Prompt in the project folder.
 3. Run:
 
-   ```
+   ```bat
    build_windows.bat
    ```
 
-   The script will automatically install `openpyxl`, `python-docx`, `lxml`, and `cx_Freeze`, then produce the installer at `dist\PRCe360ServiceListConverter-1.0.0-win-amd64.msi`.
+   The script automatically installs `openpyxl`, `python-docx`, `lxml`, `Pillow`, and `cx_Freeze`, then builds the installer. The finished file is written to:
 
-4. Distribute the `.msi` from `dist\` to other machines.
+   ```
+   dist\PRCe360ServiceListConverter-1.0.0-win-amd64.msi
+   ```
+
+4. The MSI is ready to distribute or publish as a GitHub release.
 
 ### Upgrading
 
-Increment `version` in `setup_msi.py` before building. The `upgrade_code` GUID must stay the same — Windows uses it to recognise the new build as an upgrade of the existing install rather than a separate product.
+Increment `version` in `setup_msi.py` before building. The `upgrade_code` GUID must stay the same — Windows uses it to recognise the new build as an upgrade rather than a separate product.

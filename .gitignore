@@ -3,6 +3,9 @@ brand/*Brand*
 TELECOM_MASTER_LIST/
 CLAUDE.md
 .claude/
+automox_evaluation.ps1
+automox_remediation.ps1
+DEPLOY_NOTES.md
 
 # Output and input files
 *.xlsx
@@ -27,7 +30,8 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+dist/*
+!dist/*.msi
 downloads/
 eggs/
 .eggs/

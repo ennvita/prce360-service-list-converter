@@ -1,4 +1,4 @@
-"""cx_Freeze build script — produces a per-user .msi installer."""
+"""cx_Freeze build script — produces a machine-wide .msi installer."""
 
 from cx_Freeze import setup, Executable
 
@@ -16,47 +16,16 @@ build_options = {
     ],
 }
 
-# Never change these GUIDs — Windows uses them to recognise upgrades as the
+# Never change this GUID — Windows uses it to recognise upgrades as the
 # same product rather than installing a second copy.
-UPGRADE_CODE        = "{4E7C1A0F-32B5-4D8E-9A6C-B3F27E84D510}"
-DESKTOP_COMP_GUID   = "{B3C2D1E0-F4A5-6789-BCDE-F01234567890}"
-STARTMENU_COMP_GUID = "{C4D3E2F1-05B6-789A-CDEF-012345678901}"
+UPGRADE_CODE = "{4E7C1A0F-32B5-4D8E-9A6C-B3F27E84D510}"
 
 bdist_msi_options = {
-    "all_users": False,                                     # per-user, no admin needed
-    "initial_target_dir": r"[LocalAppDataFolder]\PRCe360ServiceListConverter",
+    "all_users": True,          # machine-wide (required for SYSTEM/Automox deployment)
+    "initial_target_dir": r"[ProgramFilesFolder]PRCe360ServiceListConverter",
     "upgrade_code": UPGRADE_CODE,
     "add_to_path": False,
-    # Shortcuts need their own components so they're cleanly removed on uninstall.
-    "shortcuts": [
-        {
-            "shortcut_id": "DesktopShortcut",
-            "directory":   "DesktopFolder",
-            "name":        "PRCe360 Service List Converter",
-            "component":   "DesktopShortcutComp",
-            "target":      "[TARGETDIR]PRCe360ServiceListConverter.exe",
-            "wk_dir":      "TARGETDIR",
-        },
-        {
-            "shortcut_id": "StartMenuShortcut",
-            "directory":   "ProgramMenuFolder",
-            "name":        "PRCe360 Service List Converter",
-            "component":   "StartMenuShortcutComp",
-            "target":      "[TARGETDIR]PRCe360ServiceListConverter.exe",
-            "wk_dir":      "TARGETDIR",
-        },
-    ],
-    "data": {
-        "Component": [
-            # (Component, ComponentId, Directory_, Attributes, Condition, KeyPath)
-            ("DesktopShortcutComp",  DESKTOP_COMP_GUID,   "TARGETDIR", 0, None, None),
-            ("StartMenuShortcutComp", STARTMENU_COMP_GUID, "TARGETDIR", 0, None, None),
-        ],
-        "FeatureComponents": [
-            ("MainFeature", "DesktopShortcutComp"),
-            ("MainFeature", "StartMenuShortcutComp"),
-        ],
-    },
+    # Shortcuts are created by the Automox remediation script instead.
 }
 
 setup(
@@ -70,7 +39,7 @@ setup(
     executables=[
         Executable(
             "gui.py",
-            base="Win32GUI",
+            base="gui",
             target_name="PRCe360ServiceListConverter.exe",
         ),
     ],

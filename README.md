@@ -1,8 +1,8 @@
 # PRCe360 Service List Converter
-alw
+
 ![NMPRC Logo](brand/NMPRC_logo-1.png)
 
-Converts a telecom service list (Excel or Word) into the GridTemplate format used by Grid, with columns for First Name, Last Name, Type, and Email.
+Converts a service list (Excel or Word) into the GridTemplate format used by Grid, with columns for First Name, Last Name, Type, and Email.
 
 ---
 
@@ -37,7 +37,7 @@ When a row contains a company name instead of a person's name, the app tries to 
 
 ### Step 1 — Get the installer file
 
-You need the file named something like `PRCe360ServiceListConverter-1.0.0-win-amd64.msi`. This file should have been shared with you by the person who built it. Save it somewhere easy to find, such as your **Downloads** folder or **Desktop**.
+You need the file named something like `PRCe360ServiceListConverter-1.1.0-win-amd64.msi`. This file should have been shared with you by the person who built it. Save it somewhere easy to find, such as your **Downloads** folder or **Desktop**.
 
 ### Step 2 — Run the installer
 
@@ -54,7 +54,7 @@ You need the file named something like `PRCe360ServiceListConverter-1.0.0-win-am
 
 ### Step 4 — Find the app
 
-After installation you will find **PRCe360 PRCe360 Service List Converter** in two places:
+After installation you will find **PRCe360 Service List Converter** in two places:
 
 - A shortcut on your **Desktop**
 - Under **Start Menu → PRCe360 Service List Converter**
@@ -65,7 +65,7 @@ Double-click either one to open the app.
 
 ## Using the App
 
-The app window has two file fields and a **Convert** button.
+The app window has two file fields and a **Convert** button. The GridTemplate is bundled with the installer — no additional files are needed.
 
 ### 1. Input file
 
@@ -100,14 +100,9 @@ If the list has more than 500 entries, the app automatically splits the output i
 - `.ods`, `.numbers`, or other spreadsheet formats — not supported. Convert to `.xlsx` in Excel or Google Sheets first.
 - Scanned images or image-only PDFs — not supported.
 
-### GridTemplate file — what is required
+### GridTemplate file
 
-- Must be an Excel workbook (`.xlsx`).
-- The first row must contain the following column headers (spelling and capitalization must match exactly):
-  - `First Name`
-  - `Last Name`
-  - `Type`
-  - `Email`
+The GridTemplate is installed automatically alongside the application — you do not need to supply or locate it. The output is always written in the Grid format (`First Name`, `Last Name`, `Type`, `Email`).
 
 ### Output file
 
@@ -133,7 +128,7 @@ If the list has more than 500 entries, the app automatically splits the output i
 
 ## Uninstalling
 
-Open **Settings → Apps** (or **Control Panel → Programs and Features** on older versions of Windows), find **PRCe360 PRCe360 Service List Converter** in the list, and click **Uninstall**.
+Open **Settings → Apps** (or **Control Panel → Programs and Features** on older versions of Windows), find **PRCe360 Service List Converter** in the list, and click **Uninstall**.
 
 Alternatively, run the original `.msi` file again and choose **Remove**.
 
@@ -191,14 +186,14 @@ Alternatively, run the original `.msi` file again and choose **Remove**.
    The script automatically installs `openpyxl`, `python-docx`, `lxml`, `Pillow`, and `cx_Freeze`, then builds the installer. The finished file is written to:
 
    ```
-   dist\PRCe360ServiceListConverter-1.0.0-win-amd64.msi
+   dist\PRCe360ServiceListConverter-1.1.0-win-amd64.msi
    ```
 
 4. The MSI is ready to distribute or publish as a GitHub release.
 
 ### Upgrading
 
-Increment `version` in `setup_msi.py` before building. The `upgrade_code` GUID must stay the same — Windows uses it to recognise the new build as an upgrade rather than a separate product.
+Increment `version` in `setup_msi.py` before building. The `upgrade_code` GUID must stay the same — Windows uses it to recognise the new build as an upgrade rather than a separate product. If deploying via Automox, update `$AppVersion` in both `automox_evaluation.ps1` and `automox_remediation.ps1` to match.
 
 ---
 

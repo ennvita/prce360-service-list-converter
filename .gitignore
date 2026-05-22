@@ -1,5 +1,6 @@
 # Custom Ignores
 brand/*Brand*
+memory/
 brand/*.ico
 TELECOM_MASTER_LIST/
 CLAUDE.md

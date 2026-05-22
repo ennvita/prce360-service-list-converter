@@ -7,6 +7,7 @@ CLAUDE.md
 automox_evaluation.ps1
 automox_remediation.ps1
 DEPLOY_NOTES.md
+RELEASE_NOTES.md
 
 # Output and input files
 *.xlsx

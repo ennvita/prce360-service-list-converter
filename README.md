@@ -135,8 +135,6 @@ If the list has more than 500 entries, the app automatically splits the output i
 
 **Multi-value email cells.** If a cell contains more than one email address separated by semicolons, the app uses only the first address.
 
-**The app does not connect to the internet.** All processing happens locally on your computer. No data is uploaded anywhere.
-
 ---
 
 ## Uninstalling

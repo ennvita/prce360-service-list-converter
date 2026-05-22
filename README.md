@@ -65,23 +65,17 @@ Double-click either one to open the app.
 
 ## Using the App
 
-The app window has three file fields and a **Convert** button.
+The app window has two file fields and a **Convert** button.
 
 ### 1. Input file
 
 Click **Browse…** next to "Input file" and navigate to your service list. This is the file you received — either an Excel spreadsheet (`.xlsx`) or a Word document (`.docx`).
 
-### 2. GridTemplate
-
-Click **Browse…** next to "GridTemplate" and navigate to your `GridTemplate.xlsx` file. This is the template file for Grid. The app reads its column layout from the first (header) row.
-
-> If you do not have a GridTemplate file, ask the person who set up your Grid account for one.
-
-### 3. Output file
+### 2. Output file
 
 The app fills this in automatically based on your input file name (for example, `output_mylist.xlsx` in the same folder). You can click **Browse…** to save it somewhere else or give it a different name.
 
-### 4. Convert
+### 3. Convert
 
 Click the **Convert** button. Progress messages appear in the log area at the bottom of the window. When you see "Done," the output file is ready.
 

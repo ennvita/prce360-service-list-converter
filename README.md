@@ -65,23 +65,17 @@ Double-click either one to open the app.
 
 ## Using the App
 
-The app window has three file fields and a **Convert** button.
+The app window has two file fields and a **Convert** button.
 
 ### 1. Input file
 
 Click **Browse…** next to "Input file" and navigate to your service list. This is the file you received — either an Excel spreadsheet (`.xlsx`) or a Word document (`.docx`).
 
-### 2. GridTemplate
-
-Click **Browse…** next to "GridTemplate" and navigate to your `GridTemplate.xlsx` file. This is the template file for Grid. The app reads its column layout from the first (header) row.
-
-> If you do not have a GridTemplate file, ask the person who set up your Grid account for one.
-
-### 3. Output file
+### 2. Output file
 
 The app fills this in automatically based on your input file name (for example, `output_mylist.xlsx` in the same folder). You can click **Browse…** to save it somewhere else or give it a different name.
 
-### 4. Convert
+### 3. Convert
 
 Click the **Convert** button. Progress messages appear in the log area at the bottom of the window. When you see "Done," the output file is ready.
 
@@ -134,8 +128,6 @@ If the list has more than 500 entries, the app automatically splits the output i
 **Word input requires a proper table.** If the Word document lists names and emails in plain paragraphs rather than a table, the app will not be able to find the data and will report an error. You will need to copy the data into Excel and use the `.xlsx` input path instead.
 
 **Multi-value email cells.** If a cell contains more than one email address separated by semicolons, the app uses only the first address.
-
-**The app does not connect to the internet.** All processing happens locally on your computer. No data is uploaded anywhere.
 
 ---
 

@@ -9,6 +9,7 @@ DEPLOY_NOTES.md
 
 # Output and input files
 *.xlsx
+!GridTemplate.xlsx
 *.docx
 
 # Temp build artifacts (MSI/WiX, PyInstaller)

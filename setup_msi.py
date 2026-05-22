@@ -13,6 +13,7 @@ build_options = {
     ],
     "include_files": [
         ("brand/NMPRC_logo-1.png", "brand/NMPRC_logo-1.png"),
+        ("GridTemplate.xlsx", "GridTemplate.xlsx"),
     ],
 }
 

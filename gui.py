@@ -97,24 +97,21 @@ class App(tk.Tk):
         body = tk.Frame(self, bg=WHITE_SMOKE, padx=28, pady=22)
         body.pack(fill='both', expand=True)
         body.columnconfigure(1, weight=1)
-        body.rowconfigure(4, weight=1)
+        body.rowconfigure(3, weight=1)
 
-        self.source_var   = tk.StringVar()
-        self.template_var = tk.StringVar()
-        self.output_var   = tk.StringVar()
+        self.source_var = tk.StringVar()
+        self.output_var = tk.StringVar()
 
         self._file_row(body, "Input file  (.xlsx or .docx):",
-                       self.source_var,   self._browse_source,   row=0)
-        self._file_row(body, "GridTemplate  (.xlsx):",
-                       self.template_var, self._browse_template, row=1)
+                       self.source_var, self._browse_source, row=0)
         self._file_row(body, "Output file  (.xlsx):",
-                       self.output_var,   self._browse_output,   row=2)
+                       self.output_var, self._browse_output, row=1)
 
         tk.Frame(body, bg=TEAL, height=1).grid(
-            row=3, column=0, columnspan=3, sticky='ew', pady=(8, 0))
+            row=2, column=0, columnspan=3, sticky='ew', pady=(8, 0))
 
         btn_wrap = tk.Frame(body, bg=WHITE_SMOKE)
-        btn_wrap.grid(row=3, column=0, columnspan=3, pady=(14, 6))
+        btn_wrap.grid(row=2, column=0, columnspan=3, pady=(14, 6))
         self.convert_btn = tk.Button(
             btn_wrap, text="Convert",
             font=FONT_BOLD, fg=WHITE, bg=TEAL,
@@ -126,7 +123,7 @@ class App(tk.Tk):
         self.convert_btn.pack()
 
         log_outer = tk.Frame(body, bg=WHITE_SMOKE)
-        log_outer.grid(row=4, column=0, columnspan=3, sticky='nsew', pady=(4, 0))
+        log_outer.grid(row=3, column=0, columnspan=3, sticky='nsew', pady=(4, 0))
         log_outer.columnconfigure(0, weight=1)
         log_outer.rowconfigure(2, weight=1)
 
@@ -176,10 +173,6 @@ class App(tk.Tk):
             if (here / candidate).exists():
                 self.source_var.set(str(here / candidate))
                 break
-        for template in ('GridTemplate(4).xlsx',):
-            if (here / template).exists():
-                self.template_var.set(str(here / template))
-                break
         self.output_var.set(str(here / 'output.xlsx'))
 
     # ── File pickers ──────────────────────────────────────────────────────────
@@ -197,14 +190,6 @@ class App(tk.Tk):
             p = Path(path)
             self.output_var.set(str(p.with_name(f"output_{p.stem}.xlsx")))
 
-    def _browse_template(self):
-        path = filedialog.askopenfilename(
-            title="Select GridTemplate",
-            filetypes=[("Excel workbook", "*.xlsx"), ("All files", "*.*")],
-        )
-        if path:
-            self.template_var.set(path)
-
     def _browse_output(self):
         path = filedialog.asksaveasfilename(
             title="Save output as",
@@ -217,21 +202,23 @@ class App(tk.Tk):
     # ── Conversion ────────────────────────────────────────────────────────────
 
     def _run(self):
-        source   = self.source_var.get().strip()
-        template = self.template_var.get().strip()
-        output   = self.output_var.get().strip()
+        source = self.source_var.get().strip()
+        output = self.output_var.get().strip()
 
-        if not source or not template or not output:
+        if not source or not output:
             messagebox.showerror("Missing input",
-                                 "Please fill in all three file paths.")
+                                 "Please select an input file and output path.")
             return
         if not Path(source).exists():
             messagebox.showerror("File not found",
                                  f"Input file not found:\n{source}")
             return
+
+        template = str(_asset('GridTemplate.xlsx'))
         if not Path(template).exists():
-            messagebox.showerror("File not found",
-                                 f"Template not found:\n{template}")
+            messagebox.showerror("Template missing",
+                                 "GridTemplate.xlsx was not found in the install folder.\n"
+                                 "Please reinstall the application.")
             return
 
         self.convert_btn.configure(state='disabled', text="Converting…",
@@ -242,6 +229,7 @@ class App(tk.Tk):
 
         threading.Thread(target=self._do_convert,
                          args=(source, template, output), daemon=True).start()
+
 
     def _do_convert(self, source: str, template: str, output: str):
         stream = _WidgetStream(self.log)

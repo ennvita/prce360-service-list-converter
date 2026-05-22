@@ -19,6 +19,7 @@ Converts a telecom service list (Excel or Word) into the GridTemplate format use
 - [Limitations and Known Restrictions](#limitations-and-known-restrictions)
 - [Uninstalling](#uninstalling)
 - [Building the Installer (Developers Only)](#building-the-installer-developers-only)
+- [Roadmap](#roadmap)
 
 ---
 
@@ -206,3 +207,9 @@ Alternatively, run the original `.msi` file again and choose **Remove**.
 ### Upgrading
 
 Increment `version` in `setup_msi.py` before building. The `upgrade_code` GUID must stay the same — Windows uses it to recognise the new build as an upgrade rather than a separate product.
+
+---
+
+## Roadmap
+
+- **Optional shortcuts during install** — the current installer always creates Desktop and Start Menu shortcuts. A future release will prompt the user to opt in or out during installation. This requires migrating from cx_Freeze's MSI builder to a more capable installer tool such as Inno Setup.

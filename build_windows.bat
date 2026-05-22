@@ -23,6 +23,15 @@ if %errorlevel% neq 0 (
 )
 
 echo.
+echo Generating application icon...
+python -c "from PIL import Image; img = Image.open('brand/NMPRC_logo-1.png').convert('RGBA'); sizes = [(16,16),(32,32),(48,48),(64,64),(128,128),(256,256)]; imgs = [img.resize(s, Image.LANCZOS) for s in sizes]; imgs[0].save('brand/NMPRC_logo.ico', format='ICO', append_images=imgs[1:])"
+if %errorlevel% neq 0 (
+    echo ERROR: Icon generation failed. Ensure brand\NMPRC_logo-1.png exists.
+    pause
+    exit /b 1
+)
+
+echo.
 echo Building PRCe360ServiceListConverter.msi ...
 python setup_msi.py bdist_msi
 if %errorlevel% neq 0 (
